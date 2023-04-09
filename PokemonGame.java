@@ -19,7 +19,7 @@ public class PokemonGame {
         while (!validInput) {
             String choice = getUserInput(scan);
             if (choice.equals("1") || choice.equals("2") || choice.equals("3")) {
-                 pokemon = makePokemon(choice);
+                pokemon = makePokemon(choice);
                 validInput = true;
             } else {
                 System.out.println("Invalid choice");
@@ -41,9 +41,9 @@ public class PokemonGame {
             if (userTurn) {
                 System.out.print("*** YOUR TURN ***\n" +
                         "Choose an attack:\n" +
-                        "  1. " + pokemon.getAtk(1) + " (Low Risk)\n" +
-                        "  2. " + pokemon.getAtk(2) + " (Medium Risk)\n" +
-                        "  3. " + pokemon.getAtk(3) + " (High Risk)\n" +
+                        "  1. " + pokemon.getAtkName(1) + " (Low Risk)\n" +
+                        "  2. " + pokemon.getAtkName(2) + " (Medium Risk)\n" +
+                        "  3. " + pokemon.getAtkName(3) + " (High Risk)\n" +
                         "Enter 1, 2, or 3: "
                 );
                 String userRisk = scan.nextLine().trim();
@@ -53,8 +53,10 @@ public class PokemonGame {
                     int risk = Integer.parseInt(userRisk);
                     int atkVal = pokemon.attack(risk);
                     compPokemon.setHp(compPokemon.getHp() - atkVal);
-                    System.out.println(pokemon.getName() + " used " + pokemon.getAtk(risk) + " and dealt " + atkVal + " damage!");
-                    System.out.println("The opponent's HP is now " + Math.max(compPokemon.getHp(), 0) + "\n");
+                    System.out.println(pokemon.getName() + " used " + pokemon.getAtkName(risk) + " and dealt " + atkVal + " damage!");
+                    System.out.println("The opponent's HP is now " + Math.max(compPokemon.getHp(), 0));
+                    System.out.println("--Press enter to continue--");
+                    scan.nextLine();
                 } else {
                     System.out.println("Invalid option. Enter 1, 2, or 3.\n");
                     continue;
@@ -62,12 +64,11 @@ public class PokemonGame {
             // Computer's turn
             } else {
                 // Attack and show results
-                System.out.println("*** OPPONENT'S TURN ***\nPress enter to continue");
-                scan.nextLine();
+                System.out.println("*** OPPONENT'S TURN ***");
                 int compRisk = rand.nextInt(3) + 1;
                 int compAtkVal = compPokemon.attack(compRisk);
                 pokemon.setHp(pokemon.getHp() - compAtkVal);
-                System.out.println(compPokemon.getName() + " used " + compPokemon.getAtk(compRisk) + " and dealt " + compAtkVal + " damage!");
+                System.out.println(compPokemon.getName() + " used " + compPokemon.getAtkName(compRisk) + " and dealt " + compAtkVal + " damage!");
                 System.out.println("Your HP is now " + Math.max(pokemon.getHp(), 0) + "\n");
             }
 

@@ -43,7 +43,7 @@ public class Pokemon {
      * @param index identifies the attack
      * @return the name of the attack
      */
-    public String getAtk(int index) {
+    public String getAtkName(int index) {
         switch (index) {
             case 1: return this.atk1;
             case 2: return this.atk2;
@@ -68,14 +68,11 @@ public class Pokemon {
     public int attack(int risk) {
         Random rand = new Random();
         // Stronger attacks are also riskier
-        if (risk == 1) {
-            return 100 + rand.nextInt(21) - 10;
-        } else if (risk == 2) {
-            return 100 + rand.nextInt(101) - 50;
-        } else if (risk == 3) {
-            return 100 + rand.nextInt(201) - 100;
-        } else {
-            return -1; // Invalid risk value
+        switch (risk) {
+            case 1: return 100 + rand.nextInt(21) - 10;
+            case 2: return 100 + rand.nextInt(101) - 50;
+            case 3: return 100 + rand.nextInt(201) - 100;
+            default: return -1; // Invalid risk value
         }
     }
 }
